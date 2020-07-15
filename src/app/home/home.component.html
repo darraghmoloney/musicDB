@@ -1,0 +1,97 @@
+
+<table class="ui very basic table">
+    
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of MusicArray">
+                <td>{{item.title}}</td>
+                <td>{{item.artist}}</td>
+                <td>{{item.genre}}</td>
+                <td>{{item.year}}</td>
+                <td>
+                    <button class="ui button" (click)="delete(item._id)" >delete</button>
+        <button class="ui primary button" (click)="showUpdate(item._id)" >update</button>
+                </td>
+            </tr>
+        </tbody>
+    
+</table>
+
+<!-- <ul *ngFor="let item of MusicArray">
+
+
+    <li>{{item.title}} {{item.artist}}
+
+        <button class="ui button" (click)="delete(item._id)" >Delete</button>
+        <button class="ui primary button" (click)="showUpdate(item._id)" >Update</button>
+    </li>
+</ul> -->
+
+<div #updateFrom *ngIf="showUpdateForm">
+    <p>updating</p>
+    <form class="ui form">
+        <div class="two fields">
+            <div class="field">
+                <input #updateArtist type="text" placeholder="artist new info">
+            </div>
+            <div class="field">
+                <input #updateTitle type="text" placeholder="title new info">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <input #updateGenre type="text" placeholder="genre new info">
+            </div>
+            <div class="field">
+                <input #updateYear type="number" placeholder="year new info">
+            </div>
+        </div>
+        <button 
+            type="button" 
+            class="ui button blue" 
+            (click)="update(updateArtist.value, updateTitle.value, updateGenre.value, updateYear.value)"
+            >
+            update
+        </button>
+        <button class="ui button black" (click)="closeUpdateForm()">close</button>
+    </form>
+</div>
+
+<button class="ui button green" (click)="toggleAdd()" *ngIf="!showAddForm && !showUpdateForm">new</button>
+
+<form class="ui form" *ngIf="showAddForm">
+    <div class="two fields">
+        
+        <input #newArtist type="text" placeholder="artist">
+        <input #newTitle type="text" placeholder="title">
+    </div>
+    <div class="two fields">
+        <input #newGenre type="text" placeholder="genre">
+        <input #newYear type="number" placeholder="year">
+    </div>
+    <button class="ui button green" (click)="add(newArtist.value, newTitle.value, newGenre.value, newYear.value)">add</button>
+    <button class="ui button black" (click)="toggleAdd()">cancel</button>
+</form>
+
+<!-- <div class="ui basic modal">
+    <div class="content">
+        <p>Are you sure you want to delete this?</p>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            No
+        </div>
+        <div class="ui green ok inverted button">
+            Yes
+        </div>
+    </div>
+</div> -->
